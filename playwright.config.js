@@ -1,6 +1,7 @@
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
   testDir: './tests',
+	testIgnore: 'tests/old/**', // Ignore tests/old/ folder
   timeout: 60000,
   use: {
     browserName: 'chromium',
