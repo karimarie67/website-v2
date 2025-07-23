@@ -204,3 +204,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 screenshot.png
+screenshots/
