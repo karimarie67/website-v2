@@ -1,0 +1,508 @@
+# Page snapshot
+
+```yaml
+- 'dialog "Boost.Asio Esc Tip: limit the search scope by navigating to a library page. Libraries (155) Learn (33)"':
+  - 'heading "Boost.Asio Esc Tip: limit the search scope by navigating to a library page." [level=2]':
+    - combobox "Search...": Boost.Asio
+    - button "Esc"
+    - text: "Tip: limit the search scope by navigating to a library page."
+    - tablist:
+      - tab "Libraries (155)" [selected]
+      - tab "Learn (33)"
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+  - text: Every asynchronous operation in
+  - mark: Boost.Asio
+  - text: has associated characteristics that specify their behaviour. An allocator determines how the asynchronous operations allocate memory resources …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Executors":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/executors.html
+  - text: Every asynchronous operation has an associated executor that determines how the completion handlers are queued and run. Asynchronous operations use the associated executor to …
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Per-Operation Cancellation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html
+  - text: In
+  - mark: Boost.Asio
+  - text: ", various objects such as sockets and timers offer the ability to terminate all ongoing asynchronous operations globally through their close …"
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Allocators":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/allocators.html
+  - text: … of the first packet in the queue to the low-level
+  - mark: Boost.Asio
+  - text: function async_write on the transport layer. Lastly …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Compiler/platform feature detection macros":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.compiler_platform_feature_detection_macros
+  - text: SIO_HAS_USER_DEFINED_LITERALS Always enabled. Retained for backwards compatibility in user code. BOOST_ASIO_HAS …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Macros":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.macros
+  - text: … ASIO_NO_TYPEID Disables uses of the typeid operator in
+  - mark: Boost.Asio
+  - text: . Defined automatically if BOOST_NO_TYPEID is …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Mailing List":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.mailing_list
+  - text: A mailing list specifically for
+  - mark: Boost.Asio
+  - text: may be found on SourceForge.net. Newsgroup access is provided via Gmane.
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Debugger support":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.debugger_support
+  - text: Some debugger extensions for use with Asio may be found at https://github.com/chriskohlhoff/asio-debugger- …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Optional separate compilation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.optional_separate_compilation
+  - text: By default,
+  - mark: Boost.Asio
+  - text: is a header-only library. However, some developers may prefer to build
+  - mark: Boost.Asio
+  - text: using …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Building Boost Libraries":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.building_boost_libraries
+  - text: You may build the subset of Boost libraries required to use
+  - mark: Boost.Asio
+  - text: and its examples by running the following command from the root …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Dependencies":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.dependencies
+  - text: The following libraries must be available in order to link programs that use
+  - mark: Boost.Asio
+  - text: ": Boost.System for the boost:: …"
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Using, Building, and Configuring Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html
+          - text: Using, Building, and Configuring
+          - mark: Boost.Asio
+      - listitem:
+        - link "Supported Platforms":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/using.html#boost_asio.using.supported_platforms
+  - text: "The following platform and compiler combinations are regularly tested: Linux using g++ 4.6 or later Linux using clang 3. …"
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Executors":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/executors.html
+      - listitem:
+        - 'link "Example: using the constructor''s executor as the default associated executor"':
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/executors.html#mqtt5.asio_compliance.executors.example_using_the_constructor_s_
+  - text: In this code snippet, the mqtt_client is constructed with a strand. Consequently, the mqtt_client adopts the strand as …
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Per-Operation Cancellation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html
+      - listitem:
+        - link "About protocol-level cancellation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html#mqtt5.asio_compliance.per_op_cancellation.protocol_level_cancellation
+  - text: "In the context of mqtt_client, the handling of cancellation signals varies across different asynchronous operations. Except for mqtt_client: …"
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Per-Operation Cancellation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html
+      - listitem:
+        - link "parallel_group/operator || and asynchronous functions in the mqtt_client":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html#mqtt5.asio_compliance.per_op_cancellation.parallel_group
+  - text: As a result of supporting per-operation cancellation, all the asynchronous functions with the mqtt_client can be used in parallel_ …
+  - navigation:
+    - list:
+      - listitem:
+        - link "MQTT5":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5
+      - listitem:
+        - link "Compliance With Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance.html
+          - text: Compliance With
+          - mark: Boost.Asio
+      - listitem:
+        - link "Per-Operation Cancellation":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html
+      - listitem:
+        - 'link "Example: associating a cancellation slot with an asynchronous operation"':
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/mqtt5/doc/html/mqtt5/asio_compliance/per_op_cancellation.html#mqtt5.asio_compliance.per_op_cancellation.example_associating_a_cancellati
+  - text: This example illustrates associating a cancellation slot with a mqtt_client::async_publish operation and emitting a terminal cancellation signal. …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Basic Boost.Asio Anatomy":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/basics.html
+          - text: Basic
+          - mark: Boost.Asio
+          - text: Anatomy
+  - mark: Boost.Asio
+  - text: may be used to perform both synchronous and asynchronous operations on I/O objects such as sockets. Before using Boost …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Proposed Standard Executors":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/std_executors.html
+      - listitem:
+        - link "Standard Executor Use in Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/std_executors.html#boost_asio.std_executors.standard_executor_use_in_boost_asio
+          - text: Standard Executor Use in
+          - mark: Boost.Asio
+  - text: … with both proposed standard executors, and with Networking TS executors.
+  - mark: Boost.Asio
+  - text: "'s implementation determines at compile time which model a …"
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Proposed Standard Executors":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/std_executors.html
+      - listitem:
+        - link "Standard Executor Implementations in Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/std_executors.html#boost_asio.std_executors.standard_executor_implementations_in_boost_asio
+          - text: Standard Executor Implementations in
+          - mark: Boost.Asio
+  - text: The io_context::executor_type, thread_pool::executor_type, system_executor, and strand …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Fiber":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber
+      - listitem:
+        - link "Integrating Fibers with Asynchronous Callbacks":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/callbacks.html
+      - listitem:
+        - link "Then There’s Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/callbacks/then_there_s____boost_asio__.html
+          - text: Then There’s
+          - mark: Boost.Asio
+  - text: ld_handler specified // by handler_type<>::type. A particular asio async method constructs the // …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Fiber":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber
+      - listitem:
+        - link "Sharing a Thread with Another Main Loop":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/integration.html
+      - listitem:
+        - link "Deeper Dive into Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/integration/deeper_dive_into___boost_asio__.html
+          - text: Deeper Dive into
+          - mark: Boost.Asio
+  - text: ires_at() the passed std::chrono::steady_clock::time_point. Usually. As …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Fiber":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber
+      - listitem:
+        - link "Rationale":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/rationale.html
+      - listitem:
+        - link "support for Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/fiber/doc/html/fiber/rationale.html#fiber.rationale.support_for_boost_asio
+          - text: support for
+          - mark: Boost.Asio
+  - text: Support for
+  - mark: Boost.Asio
+  - text: ’s async-result is not part of the official API. However, to integrate with a boost …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - link "Threads and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html
+          - text: Threads and
+          - mark: Boost.Asio
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Networking":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/networking.html
+      - listitem:
+        - link "The BSD Socket API and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/networking/bsd_sockets.html
+          - text: The BSD Socket API and
+          - mark: Boost.Asio
+  - text: … The following table shows the mapping between the BSD socket API and
+  - mark: Boost.Asio
+  - text: ": BSD Socket API Elements Equivalents in"
+  - mark: Boost.Asio
+  - text: …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - link "Threads and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html
+          - text: Threads and
+          - mark: Boost.Asio
+      - listitem:
+        - link "See Also":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html#boost_asio.overview.core.threads.see_also
+  - text: io_context, post.
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - link "Threads and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html
+          - text: Threads and
+          - mark: Boost.Asio
+      - listitem:
+        - link "Internal Threads":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html#boost_asio.overview.core.threads.internal_threads
+  - text: The implementation of this library for a particular platform may make use of one or more internal threads to emulate asynchronicity. As far as …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - link "Threads and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html
+          - text: Threads and
+          - mark: Boost.Asio
+      - listitem:
+        - link "Thread Pools":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html#boost_asio.overview.core.threads.thread_pools
+  - text: Multiple threads may call io_context::run() to set up a pool of threads from which completion handlers may be …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - link "Threads and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html
+          - text: Threads and
+          - mark: Boost.Asio
+      - listitem:
+        - link "Thread Safety":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/threads.html#boost_asio.overview.core.threads.thread_safety
+  - text: In general, it is safe to make concurrent use of distinct objects, but unsafe to make concurrent use of a single object. …
+  - navigation:
+    - list:
+      - listitem:
+        - link "Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/libs/asio
+      - listitem:
+        - link "Overview":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview.html
+      - listitem:
+        - link "Core Concepts and Functionality":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core.html
+      - listitem:
+        - 'link "The Proactor Design Pattern: Concurrency Without Threads"':
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/async.html
+      - listitem:
+        - link "Proactor and Boost.Asio":
+          - /url: https://www.stage.boost.org/doc/libs/latest/doc/html/boost_asio/overview/core/async.html#boost_asio.overview.core.async.proactor_and_boost_asio
+          - text: Proactor and
+          - mark: Boost.Asio
+  - text: Let us examine how the Proactor design pattern is implemented in
+  - mark: Boost.Asio
+  - text: ", without reference to platform-specific details. Proactor design …"
+  - button "Show More"
+  - link "Search by Algolia":
+    - /url: https://www.algolia.com/?utm_source=react-instantsearch&utm_medium=website&utm_content=www.stage.boost.org&utm_campaign=poweredby
+    - img
+  - link "Report Issue":
+    - /url: https://github.com/cppalliance/boost-gecko/issues
+```

@@ -205,3 +205,7 @@ override.tf.json
 terraform.rc
 screenshot.png
 screenshots/
+extract_links.py
+extract_links.py.py
+test-results/smoke_tests-Boost-Smoke-Te-08d63-n-menu-links-work-correctly-staging/trace.zip
+test-results/smoke_tests-Boost-Smoke-Te-13c7d--and-links-to-documentation-staging/trace.zip
