@@ -6,10 +6,10 @@ test.describe('Boost Staging Smoke Tests', () => {
   test('Homepage loads with key elements', async ({ page }) => {
     const response = await page.goto('https://www.stage.boost.cppalliance.org/', { waitUntil: 'networkidle', timeout: 15000 });
     expect(response?.status()).toBe(200);
-    fs.appendFileSync('smoke-logs.txt', `Homepage loaded with status: ${response?.status()}\n`);
+    fs.appendFileSync('smoke-logs.txt', 'Homepage loaded with status: ' + response?.status() + '\n');
 
     // Check logo
-    const logoLocator = page.locator('img[alt="Boost"], div.toon').first();
+    const logoLocator = page.getByRole('img', { name: /Boost/i });
     await expect(logoLocator).toBeVisible({ timeout: 10000 });
     fs.appendFileSync('smoke-logs.txt', 'Logo visible\n');
 
@@ -37,24 +37,25 @@ test.describe('Boost Staging Smoke Tests', () => {
 
     // Log all nav links
     const allLinks = await page.locator('nav a, a.menu-link').all();
-    fs.appendFileSync('smoke-logs.txt', `Found ${allLinks.length} nav links:\n`);
+    fs.appendFileSync('smoke-logs.txt', 'Found ' + allLinks.length + ' nav links:\n');
     for (let i = 0; i < allLinks.length; i++) {
       const text = await allLinks[i].textContent() || 'no text';
       const href = await allLinks[i].getAttribute('href') || 'no href';
-      fs.appendFileSync('smoke-logs.txt', `Link ${i + 1}: text="${text.trim()}", href="${href}"\n`);
+      fs.appendFileSync('smoke-logs.txt', 'Link ' + (i + 1) + ': text="' + text.trim() + '", href="' + href + '"\n');
     }
 
     for (const [text, urlPattern] of Object.entries(navLinks)) {
       const linkLocator = text === 'libraries' ? page.locator('a#libraries') :
                          text === 'releases' ? page.locator('a#releases') :
                          text === 'community' ? page.locator('a#community') :
-                         page.locator(`a[href="/${text === 'learn' ? 'docs' : text.toLowerCase()}/"]`);
+                         text === 'news' ? page.locator('a#news') :
+                         page.locator('a#learn');
 
       await expect(linkLocator).toBeVisible({ timeout: 10000 });
       await linkLocator.click({ timeout: 15000 });
       await expect(page).toHaveURL(urlPattern, { timeout: 15000 });
       await expect(page).not.toHaveURL(/.*404.*/);
-      fs.appendFileSync('smoke-logs.txt', `Navigated to ${text}: ${page.url()}\n`);
+      fs.appendFileSync('smoke-logs.txt', 'Navigated to ' + text + ': ' + page.url() + '\n');
       await page.goto('https://www.stage.boost.cppalliance.org/');
     }
   });
@@ -62,19 +63,28 @@ test.describe('Boost Staging Smoke Tests', () => {
   // TC_SMOKE_003: Library Listing
   test('Libraries page displays and links to documentation', async ({ page }) => {
     await page.goto('https://www.stage.boost.cppalliance.org/libraries', { waitUntil: 'networkidle' });
-    await expect(page.locator('text=/Boost.Asio/i')).toBeVisible({ timeout: 10000 });
-    await expect(page.locator('text=/Boost.Beast/i')).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Asio/, level: 3 })).toBeVisible({ timeout: 10000 });
+    await expect(page.getByRole('heading', { name: /Beast/, level: 3 })).toBeVisible({ timeout: 10000 });
     fs.appendFileSync('smoke-logs.txt', 'Boost.Asio and Boost.Beast visible on libraries page\n');
 
-    await page.locator('text=/Boost.Asio/i').click({ timeout: 15000 });
-    await expect(page).toHaveURL(/.*asio.*/i, { timeout: 15000 });
-    fs.appendFileSync('smoke-logs.txt', `Navigated to Boost.Asio docs: ${page.url()}\n`);
+    const libraries = [
+      { name: 'Asio', href: '/library/latest/asio/', urlPattern: /.*asio.*/i },
+      { name: 'Beast', href: '/library/latest/beast/', urlPattern: /.*beast.*/i },
+      { name: 'Describe', href: '/library/latest/describe/', urlPattern: /.*describe.*/i }
+    ];
+
+    for (const lib of libraries) {
+      await page.locator('a[href="' + lib.href + '"]').click({ timeout: 15000 });
+      await expect(page).toHaveURL(lib.urlPattern, { timeout: 15000 });
+      fs.appendFileSync('smoke-logs.txt', 'Navigated to Boost.' + lib.name + ' docs: ' + page.url() + '\n');
+      await page.goto('https://www.stage.boost.cppalliance.org/libraries', { waitUntil: 'networkidle' });
+    }
   });
 
   // TC_SMOKE_004: Download Functionality
   test('Download section works correctly', async ({ page }) => {
     await page.goto('https://www.stage.boost.cppalliance.org/releases', { waitUntil: 'networkidle' });
-    const versionLink = page.locator('a:text(/latest release|download|1\.\d+\.\d+/i)').first();
+    const versionLink = page.getByText('boost_1_88_0.tar.gz').first();
     await expect(versionLink).toBeVisible({ timeout: 10000 });
     fs.appendFileSync('smoke-logs.txt', 'Download version link visible\n');
 
@@ -83,21 +93,35 @@ test.describe('Boost Staging Smoke Tests', () => {
       versionLink.click()
     ]);
     expect(download.suggestedFilename()).toMatch(/\.zip$|\.tar\.gz$/);
-    fs.appendFileSync('smoke-logs.txt', `Download initiated: ${download.suggestedFilename()}\n`);
+    fs.appendFileSync('smoke-logs.txt', 'Download initiated: ' + download.suggestedFilename() + '\n');
   });
 
-  // TC_SMOKE_005: Search Functionality
+  //TC_SMOKE_005: Search bar functionality
   test('Search bar works with basic query', async ({ page }) => {
-    await page.goto('https://www.stage.boost.cppalliance.org/', { waitUntil: 'networkidle' });
-    const searchInput = page.locator('input[aria-label*="search"], input[type="search"]').first();
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
-    fs.appendFileSync('smoke-logs.txt', 'Search bar visible\n');
+  await page.goto('https://www.stage.boost.cppalliance.org/', { waitUntil: 'networkidle' });
+  const searchTrigger = page.locator('[class*="search"], i[class*="fa-search"], span[class*="icon-search"]').first();
+  await expect(searchTrigger).toBeVisible({ timeout: 10000 });
+  fs.appendFileSync('smoke-logs.txt', 'Search bar trigger visible\n');
 
-    await searchInput.fill('Boost.Asio');
-    await searchInput.press('Enter');
-    await expect(page.locator('text=/Boost.Asio/i')).toBeVisible({ timeout: 10000 });
-    fs.appendFileSync('smoke-logs.txt', 'Search results for "Boost.Asio" displayed\n');
-  });
+  await searchTrigger.click();
+  const searchInput = page.getByRole('combobox', { name: 'Search' });
+  await expect(searchInput).toBeVisible({ timeout: 10000 });
+  await searchInput.fill('Boost.Asio');
+  await Promise.all([
+    searchInput.press('Enter'),
+    page.waitForResponse(/algolia/, { timeout: 10000 }).catch(() => {}) // Allow test to proceed if no Algolia response
+  ]);
+
+  // Verify and click the first search result
+  const resultLink = page.getByRole('dialog').getByText('Boost.Asio').locator('a[href*="/libs/asio"]').first();
+  await expect(resultLink).toBeVisible({ timeout: 10000 });
+  await expect(resultLink).toHaveAttribute('href', /libs\/asio/, { timeout: 5000 });
+  fs.appendFileSync('smoke-logs.txt', 'Search result for "Boost.Asio" visible\n');
+
+  await resultLink.click({ timeout: 15000 });
+  await expect(page).toHaveURL(/doc\/libs\/latest\/libs\/asio/, { timeout: 15000 });
+  fs.appendFileSync('smoke-logs.txt', 'Navigated to Boost.Asio docs from search result\n');
+});
 
   // TC_SMOKE_006: Responsive Design
   test('Homepage is responsive on mobile', async ({ page }) => {
