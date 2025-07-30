@@ -60,7 +60,7 @@ test.describe('Boost Smoke Tests', () => {
     }
   });
 
-  // TC_SMOKE_003: Library Listing
+  // TC_SMOKE_003: Library Listings
   test('Libraries page displays and links to documentation', async ({ page }) => {
     await page.goto('/libraries', { waitUntil: 'networkidle' });
     await expect(page.getByRole('heading', { name: /Asio/, level: 3 })).toBeVisible({ timeout: 10000 });
