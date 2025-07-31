@@ -211,3 +211,5 @@ test-results/smoke_tests-Boost-Smoke-Te-08d63-n-menu-links-work-correctly-stagin
 test-results/smoke_tests-Boost-Smoke-Te-13c7d--and-links-to-documentation-staging/trace.zip
 trace.zip
 error-context.md
+smoke-logs.txt
+test-logs.txt
