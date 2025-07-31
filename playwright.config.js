@@ -11,11 +11,11 @@ const config = {
   projects: [
     {
       name: 'staging',
-      use: { baseURL: 'https://www.stage.boost.cppalliance.org' },
+      use: { baseURL: 'https://www.stage.boost.org' },
     },
     {
       name: 'production',
-      use: { baseURL: 'https://www.boost.io' },
+      use: { baseURL: 'https://www.boost.org' },
     },
   ],
 };

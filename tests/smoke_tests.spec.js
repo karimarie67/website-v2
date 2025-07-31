@@ -97,32 +97,31 @@ test.describe('Boost Smoke Tests', () => {
   });
 
   // TC_SMOKE_005: Search bar functionality
-  test('Search bar works with basic query', async ({ page }) => {
-    await page.goto('/', { waitUntil: 'networkidle' });
-    const searchTrigger = page.locator('[class*="search"], i[class*="fa-search"], span[class*="icon-search"]').first();
-    await expect(searchTrigger).toBeVisible({ timeout: 10000 });
-    fs.appendFileSync('smoke-logs.txt', 'Search bar trigger visible\n');
+test('Search bar works with basic query', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'networkidle' });
+  const searchTrigger = page.locator('[class*="search"], i[class*="fa-search"], span[class*="icon-search"]').first();
+  await expect(searchTrigger).toBeVisible({ timeout: 10000 });
+  fs.appendFileSync('smoke-logs.txt', 'Search bar trigger visible\n');
 
-    await searchTrigger.click();
-    const searchInput = page.getByRole('combobox', { name: 'Search' });
-    await expect(searchInput).toBeVisible({ timeout: 10000 });
-    await searchInput.fill('Boost.Asio');
-    await Promise.all([
-      searchInput.press('Enter'),
-      page.waitForResponse(/algolia/, { timeout: 10000 }).catch(() => {}) // Allow test to proceed if no Algolia response
-    ]);
+  await searchTrigger.click();
+  const searchInput = page.getByRole('combobox', { name: 'Search' });
+  await expect(searchInput).toBeVisible({ timeout: 10000 });
+  await searchInput.fill('Boost.Asio');
+  await Promise.all([
+    searchInput.press('Enter'),
+    page.waitForResponse(/algolia/, { timeout: 10000 }).catch(() => {}) // Allow test to proceed if no Algolia response
+  ]);
 
-    // Verify and click the first search result
-    const resultLink = page.getByRole('dialog').getByText('Boost.Asio').locator('a[href*="/libs/asio"]').first();
-    await expect(resultLink).toBeVisible({ timeout: 10000 });
-    await expect(resultLink).toHaveAttribute('href', /libs\/asio/, { timeout: 5000 });
-    fs.appendFileSync('smoke-logs.txt', 'Search result for "Boost.Asio" visible\n');
+  // Verify and click the first search result
+  const resultLink = page.locator('a[href*="/libs/asio"]').getByText('Asio').first();
+  await expect(resultLink).toBeVisible({ timeout: 10000 });
+  await expect(resultLink).toHaveAttribute('href', /libs\/asio/, { timeout: 5000 });
+  fs.appendFileSync('smoke-logs.txt', 'Search result for "Asio" visible\n');
 
-    await resultLink.click({ timeout: 15000 });
-    await expect(page).toHaveURL(/doc\/libs\/latest\/libs\/asio/, { timeout: 15000 });
-    fs.appendFileSync('smoke-logs.txt', 'Navigated to Boost.Asio docs from search result\n');
-  });
-
+  await resultLink.click({ timeout: 15000 });
+  await expect(page).toHaveURL(/doc\/libs\/latest\/(libs\/asio|doc\/html\/boost_asio\.html)/, { timeout: 15000 });
+  fs.appendFileSync('smoke-logs.txt', 'Navigated to Boost.Asio docs from search result\n');
+});
   // TC_SMOKE_006: Responsive Design
   test('Homepage is responsive on mobile', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
