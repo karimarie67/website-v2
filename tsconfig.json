@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "types": ["node"],
+    "outDir": "./dist",
+    "esModuleInterop": true
+  },
+  "include": ["*.js", "tests/**/*.js"],
+  "exclude": ["node_modules"]
+}

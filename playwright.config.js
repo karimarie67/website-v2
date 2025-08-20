@@ -41,5 +41,10 @@ module.exports = {
       },
     },
   ],
-  // ... other config ...
+  use: {
+    // Enable TypeScript support
+    launchOptions: {
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    },
+  },
 };
