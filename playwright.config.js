@@ -1,4 +1,6 @@
-module.exports = {
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
   projects: [
     {
       name: 'staging',
@@ -42,9 +44,11 @@ module.exports = {
     },
   ],
   use: {
-    // Enable TypeScript support
-    launchOptions: {
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    },
+    screenshot: 'only-on-failure',
+    video: 'off',
   },
-};
+  testDir: './tests',
+  testMatch: ['**/*.spec.js'],
+  timeout: 90000,
+  retries: 1,
+});

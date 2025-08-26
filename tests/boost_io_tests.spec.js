@@ -1,5 +1,6 @@
-const { test, expect } = require('@playwright/test');
-const fs = require('fs');
+import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import { logAndScreenshot, logOnFailure, safeGoto } from './utils.js';
 
 // Centralized locators for reusability
 const selectors = {
