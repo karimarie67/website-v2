@@ -45,64 +45,138 @@ test.describe('Boost Staging Functional Tests', () => {
     }
   });
 
-  test('Homepage loads and displays key elements', async ({ page }, testInfo) => {
-    testInfo.annotations.push({ type: 'test_case', description: 'TC_FUNC_001' });
-    testInfo.setTimeout(60000);
+test('Homepage loads and displays key elements', async ({ page }, testInfo) => {
+  testInfo.annotations.push({ type: 'test_case', description: 'TC_FUNC_001' });
+  testInfo.setTimeout(60000);
 
-    const homepageUrl = '/?cachebust=' + Date.now();
-    const startTime = Date.now();
-    const { success, finalUrl } = await safeGoto(page, testInfo, homepageUrl, { waitUntil: 'domcontentloaded' });
-    if (!success) {
-      await logOnFailure(page, testInfo, `Homepage load failed: ${finalUrl}`, 'screenshots/tc_func_001_load_failed.png');
-    }
-    const loadTime = Date.now() - startTime;
-    await logAndScreenshot(page, testInfo, `Homepage loaded in ${loadTime}ms, URL: ${page.url()}`, 'screenshots/tc_func_001_loaded.png');
-    expect(loadTime / 1000).toBeLessThanOrEqual(15);
+  const homepageUrl = '/?cachebust=' + Date.now();
+  const startTime = Date.now();
+  const { success, finalUrl } = await safeGoto(page, testInfo, homepageUrl, { waitUntil: 'domcontentloaded' });
+  if (!success) {
+    await logOnFailure(page, testInfo, `Homepage load failed: ${finalUrl}`, 'screenshots/tc_func_001_load_failed.png');
+  }
+  const loadTime = Date.now() - startTime;
+  await logAndScreenshot(page, testInfo, `Homepage loaded in ${loadTime}ms, URL: ${page.url()}`, 'screenshots/tc_func_001_loaded.png');
+  expect(loadTime / 1000).toBeLessThanOrEqual(15);
 
-    const logoLocator = selectors.logo(page);
-    await expect(logoLocator).toBeVisible({ timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, 'Boost logo not visible', 'screenshots/tc_func_001_logo_not_visible.png');
-    });
+  // Test logo visibility with enhanced debugging
+  const logoLocator = selectors.logo(page);
+  const logoCount = await logoLocator.count();
+  fs.appendFileSync('test-logs.txt', `TC_FUNC_001 Logo locator matched ${logoCount} elements\n`);
+  
+  // Debug: Find all images on the page
+  const allImages = await page.locator('img').all();
+  const imageDetails = await Promise.all(allImages.map(async (img, index) => ({
+    index,
+    src: await img.getAttribute('src').catch(() => 'unknown'),
+    alt: await img.getAttribute('alt').catch(() => 'unknown'),
+    title: await img.getAttribute('title').catch(() => 'unknown'),
+    class: await img.getAttribute('class').catch(() => 'unknown'),
+    isVisible: await img.isVisible().catch(() => false),
+  })));
+  fs.appendFileSync('test-logs.txt', `TC_FUNC_001 ALL images on page: ${JSON.stringify(imageDetails)}\n`);
+  
+  // Specifically check for the Boost logo we saw in network logs
+  const boostSymbolImg = page.locator('img[src*="Boost_Symbol_Transparent.svg"]');
+  const boostSymbolCount = await boostSymbolImg.count();
+  fs.appendFileSync('test-logs.txt', `TC_FUNC_001 Boost_Symbol_Transparent.svg images found: ${boostSymbolCount}\n`);
+  
+  if (boostSymbolCount > 0) {
+    const isVisible = await boostSymbolImg.first().isVisible().catch(() => false);
+    const boundingBox = await boostSymbolImg.first().boundingBox().catch(() => null);
+    fs.appendFileSync('test-logs.txt', `TC_FUNC_001 Boost symbol visible: ${isVisible}, boundingBox: ${JSON.stringify(boundingBox)}\n`);
+  }
 
-    const navLocator = selectors.nav(page);
-    await expect(navLocator).toBeVisible({ timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, 'Navigation bar not visible', 'screenshots/tc_func_001_nav_not_visible.png');
-    });
+  try {
+    await expect(logoLocator).toBeVisible({ timeout: 15000 });
+  } catch (error) {
+    await logOnFailure(page, testInfo, 'Boost logo not visible', 'screenshots/tc_func_001_logo_not_visible.png');
+  }
 
-    const contentLocator = selectors.content(page);
-    await expect(contentLocator).toBeVisible({ timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, 'Main content not visible', 'screenshots/tc_func_001_content_not_visible.png');
-    });
+  // Test navigation visibility
+  const navLocator = selectors.nav(page);
+  try {
+    await expect(navLocator).toBeVisible({ timeout: 15000 });
+  } catch (error) {
+    await logOnFailure(page, testInfo, 'Navigation bar not visible', 'screenshots/tc_func_001_nav_not_visible.png');
+  }
 
-    const ctaCandidates = await page.getByRole('link', { name: /download|release/i }).all();
-    const ctaDetails = await Promise.all(ctaCandidates.map(async (candidate, index) => ({
+  // Test main content visibility
+  const contentLocator = selectors.content(page);
+  try {
+    await expect(contentLocator).toBeVisible({ timeout: 15000 });
+  } catch (error) {
+    await logOnFailure(page, testInfo, 'Main content not visible', 'screenshots/tc_func_001_content_not_visible.png');
+  }
+
+  // Enhanced CTA button detection and debugging
+  const ctaCandidates = await page.getByRole('link', { name: /download|release|get started|latest/i }).all();
+  const ctaDetails = await Promise.all(ctaCandidates.map(async (candidate, index) => ({
+    index,
+    text: await candidate.textContent().catch(() => 'unknown'),
+    href: await candidate.getAttribute('href').catch(() => 'unknown'),
+    isVisible: await candidate.isVisible().catch(() => false),
+  })));
+  fs.appendFileSync('test-logs.txt', `TC_FUNC_001 CTA candidates: ${JSON.stringify(ctaDetails)}\n`);
+
+  // If no role-based CTAs found, look for other button patterns
+  if (ctaCandidates.length === 0) {
+    const alternativeCTAs = await page.locator('a[href*="download"], a[href*="release"], .cta, #cta, [class*="download"]').all();
+    const altCtaDetails = await Promise.all(alternativeCTAs.map(async (candidate, index) => ({
       index,
       text: await candidate.textContent().catch(() => 'unknown'),
       href: await candidate.getAttribute('href').catch(() => 'unknown'),
+      class: await candidate.getAttribute('class').catch(() => 'unknown'),
+      isVisible: await candidate.isVisible().catch(() => false),
     })));
-    fs.appendFileSync('test-logs.txt', `TC_FUNC_001 CTA candidates: ${JSON.stringify(ctaDetails)}\n`);
+    fs.appendFileSync('test-logs.txt', `TC_FUNC_001 Alternative CTA candidates: ${JSON.stringify(altCtaDetails)}\n`);
+  }
 
-    const ctaButton = selectors.cta(page);
-    const ctaCount = await ctaButton.count();
-    if (ctaCount > 1) {
-      fs.appendFileSync('test-logs.txt', `TC_FUNC_001 Warning: CTA locator matched ${ctaCount} elements\n`);
+  // Test CTA button with enhanced selector
+  const ctaButton = selectors.cta(page);
+  const ctaCount = await ctaButton.count();
+  fs.appendFileSync('test-logs.txt', `TC_FUNC_001 CTA locator matched ${ctaCount} elements\n`);
+  
+  if (ctaCount === 0) {
+    // Log all links on the page for debugging
+    const allLinks = await page.locator('a').all();
+    const linkDetails = await Promise.all(allLinks.slice(0, 10).map(async (link, index) => ({
+      index,
+      text: (await link.textContent().catch(() => '')).slice(0, 50),
+      href: await link.getAttribute('href').catch(() => 'unknown'),
+    })));
+    fs.appendFileSync('test-logs.txt', `TC_FUNC_001 First 10 links on page: ${JSON.stringify(linkDetails)}\n`);
+  }
+
+  try {
+    await expect(ctaButton).toBeVisible({ timeout: 15000 });
+  } catch (error) {
+    await logOnFailure(page, testInfo, 'CTA button not visible', 'screenshots/tc_func_001_cta_not_visible.png');
+  }
+
+  // Test footer visibility
+  const footerLocator = page.getByRole('contentinfo').first();
+  try {
+    await expect(footerLocator).toBeVisible({ timeout: 15000 });
+  } catch (error) {
+    await logOnFailure(page, testInfo, 'Footer not visible', 'screenshots/tc_func_001_footer_not_visible.png');
+  }
+
+  // Test CTA button click functionality
+  try {
+    await ctaButton.click();
+    await expect(page).toHaveURL(/libraries|releases|docs|learn|download/i, { timeout: 15000 });
+  } catch (error) {
+    // If click fails, try to get the href and navigate manually for debugging
+    try {
+      const href = await ctaButton.getAttribute('href');
+      fs.appendFileSync('test-logs.txt', `TC_FUNC_001 CTA click failed, href: ${href}, current URL: ${page.url()}\n`);
+      await logOnFailure(page, testInfo, `CTA click failed or navigation failed. Current URL: ${page.url()}`, 'screenshots/tc_func_001_cta_click_failed.png');
+    } catch (innerError) {
+      await logOnFailure(page, testInfo, 'CTA click failed completely', 'screenshots/tc_func_001_cta_click_failed.png');
     }
-    await expect(ctaButton).toBeVisible({ timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, 'CTA button not visible', 'screenshots/tc_func_001_cta_not_visible.png');
-    });
-
-    const footerLocator = page.getByRole('contentinfo').first();
-    await expect(footerLocator).toBeVisible({ timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, 'Footer not visible', 'screenshots/tc_func_001_footer_not_visible.png');
-    });
-
-    await ctaButton.click().catch(async () => {
-      await logOnFailure(page, testInfo, 'CTA click failed', 'screenshots/tc_func_001_cta_click_failed.png');
-    });
-    await expect(page).toHaveURL(/libraries|releases|docs|learn|download/i, { timeout: 15000 }).catch(async () => {
-      await logOnFailure(page, testInfo, `Navigation after CTA click failed, URL: ${page.url()}`, 'screenshots/tc_func_001_cta_nav_failed.png');
-    });
-      });
+  }
+});
 
    test('Search bar is visible and functional', async ({ page }, testInfo) => {
   testInfo.annotations.push({ type: 'test_case', description: 'TC_FUNC_002' });
